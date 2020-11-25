@@ -87,6 +87,7 @@ It seems promosing, but led to a lot more code for this take home then I origina
 - A lot of edge case handling (No real testing about unhappy SimpleRet requests)
 - Add Lerna (my code is already structured to leverage lerna for code management)
 - Docker testing throws errors on restarting too quickly
+- Automated Linting
 
 ## Resources
 - [Apollo Federation](https://www.apollographql.com/docs/federation/)

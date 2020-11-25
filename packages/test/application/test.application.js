@@ -66,7 +66,7 @@ describe('Queries', () => {
 
   describe('Listing', () => {
     it('fetches a single listing with mlsId', async () => {
-      const fakeId = 1005192;
+      const fakeId = fakeListings[0].mlsId;
 
       const scope = nock(`${url}/`)
         .get(`/properties/${fakeId}`)

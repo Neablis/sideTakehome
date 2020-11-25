@@ -9,7 +9,7 @@
   "scripts": {
     "gateway:start": "node ./packages/gateway/index.js",
     "gateway:watch": "nodemon ./packages/gateway/index.js",
-    "test": "nyc mocha packages/test/**/test.*.js --watch",
+    "test": "nyc mocha packages/test/**/test.*.js --exit",
     "application:start": "node ./packages/application/index.js",
     "application:watch": "nodemon ./packages/application/index.js"
   },

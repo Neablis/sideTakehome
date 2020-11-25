@@ -10,7 +10,7 @@ class AuthenticatedDataSource extends RemoteGraphQLDataSource {
     }
 }
 
-const makeGateway = () => {
+const makeGateway = (services) => {
     return new ApolloGateway({
         serviceList: services,
         buildService({ name, url }) {
@@ -24,7 +24,7 @@ const main = async () => {
         const urls = services.map(({ url }) => url);
 
         await waitForServices(urls)
-        const gateway = makeGateway()
+        const gateway = makeGateway(services)
         const { schema, executor } = await gateway.load()
 
         const server = createServer({schema, executor})
