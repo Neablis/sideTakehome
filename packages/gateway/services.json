@@ -1,0 +1,8 @@
+{
+    "services": [
+        {
+            "name": "Application",
+            "url": "http://app:3001"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+version: '2'
+services:
+  app: 
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    command: yarn run application:watch
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+  gateway:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    command: yarn run gateway:watch
+    links:
+      - app
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3002:3002"
+    environment: 
+      - APOLLO_SCHEMA_REPORTING=true
+      - APOLLO_GRAPH_VARIANT=current
+      - APOLLO_KEY=service:Side-Takehome-3ul52t:loE_wkdDfqkiPiz71BEXrA
+    env_file:
+      - .env

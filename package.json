@@ -1,0 +1,33 @@
+{
+  "name": "sidetakehome",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=14 <15.0"
+  },
+  "description": "A simple graphql service around a third party endpoint",
+  "main": "index.js",
+  "scripts": {
+    "gateway:start": "node ./packages/gateway/index.js",
+    "gateway:watch": "nodemon ./packages/gateway/index.js",
+    "test": "nyc mocha packages/test/**/test.*.js",
+    "application:start": "node ./packages/application/index.js",
+    "application:watch": "nodemon ./packages/application/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/gateway": "^0.21.3",
+    "apollo-server": "^2.19.0",
+    "auth-header": "^1.0.0",
+    "base-64": "^1.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "graphql": "^14",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0"
+  }
+}
