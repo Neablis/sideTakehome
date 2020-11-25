@@ -19,9 +19,6 @@ Create a simple Graphql API with
 - Have docker set up locally
 - > cp .env.example .env
 - Update .env to have the correct environment variables for accessing simpleRet
-```
-
-```
 - Query health endpoint on gateway
 
 ```
