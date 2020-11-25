@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const authorization = require('auth-header');
+const { ApolloServer } = require('apollo-server');
 
 const sleep = (time) => new Promise((r) => setTimeout(r, time))
 
@@ -23,8 +24,29 @@ const waitForServices = async (urls) => {
     }
 }
 
+const createServer = ({schema, executor}) => {
+    const authentication = new Authentication();
+
+    return new ApolloServer({
+        schema,
+        executor,
+        cacheControl: {
+            calculateHttpHeaders: true,
+            defaultMaxAge: Number(process.env.CACHE_MAX_AGE) || 0,
+        },
+        context: ({ req, res }) => {
+            authentication.validateCredentials(req?.headers?.authorization)
+
+            return {
+                req,
+                res
+            }
+        },
+    })
+}
+
 /**
- * User Authentication class
+ * Singleton User Authentication class
  */
 class Authentication {
     constructor() {
@@ -58,6 +80,10 @@ class Authentication {
      * @param {string} header 
      */
     validateCredentials(header) {
+        if (!header) {
+            throw new Error('Missing authorization header');
+        }
+
         const auth = this._parseToken(header);
 
         if (auth.scheme !== 'Basic') {
@@ -81,5 +107,6 @@ class Authentication {
 
 module.exports = {
     waitForServices,
-    authentication: new Authentication()
+    createServer,
+    Authentication: new Authentication()
 };

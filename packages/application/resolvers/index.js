@@ -1,15 +1,18 @@
 const fetch = require('node-fetch');
-const { rets } = require('../services/simpleRets');
+const { SimpleRets } = require('../services/SimpleRets');
 
 const resolvers = {
   Query: { 
-    listings: (_, { city }) => {
-      return rets.getProperties({
+    listings: async (_, { city }) => {
+      return SimpleRets.getProperties({
         city
-      })
+      });
     },
     listing: (_, { mlsId }) => {
-      return rets.getProperty(mlsId)
+      return SimpleRets.getProperty(mlsId);
+    },
+    health: () => {
+      return 'OK';  
     }
   },
 };

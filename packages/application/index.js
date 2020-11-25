@@ -18,3 +18,5 @@ const server = new ApolloServer({
 server.listen({ port: PORT }).then(({ url }) => {
   console.log(`Application successfully started on ${PORT}`);
 });
+
+module.exports = server;

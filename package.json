@@ -9,7 +9,7 @@
   "scripts": {
     "gateway:start": "node ./packages/gateway/index.js",
     "gateway:watch": "nodemon ./packages/gateway/index.js",
-    "test": "nyc mocha packages/test/**/test.*.js",
+    "test": "nyc mocha packages/test/**/test.*.js --watch",
     "application:start": "node ./packages/application/index.js",
     "application:watch": "nodemon ./packages/application/index.js"
   },
@@ -26,8 +26,11 @@
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
+    "@graphql-tools/wrap": "^7.0.1",
+    "apollo-server-testing": "^2.19.0",
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
+    "nock": "^13.0.5",
     "nyc": "^15.1.0"
   }
 }

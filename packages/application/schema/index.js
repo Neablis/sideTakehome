@@ -4,6 +4,7 @@ const typeDefs = gql`
 	type Query {
 		listings(city: String): [Listing]
 		listing(mlsId: Int!): Listing
+		health: String
 	}
 
 	type Listing @key(fields: "mlsId") {

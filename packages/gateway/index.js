@@ -1,7 +1,6 @@
-const { ApolloServer } = require('apollo-server');
 const { ApolloGateway, RemoteGraphQLDataSource } = require('@apollo/gateway');
-const { waitForServices, authentication } = require('./utils');
-const { services } = require('./services.json');
+const { waitForServices, createServer } = require('./utils');
+const { services } = require('./services/services.json');
 
 const PORT = process.env.PORT || 80
 
@@ -28,23 +27,8 @@ const main = async () => {
         const gateway = makeGateway()
         const { schema, executor } = await gateway.load()
 
-        const server = new ApolloServer({
-            schema,
-            executor,
-            cacheControl: {
-                calculateHttpHeaders: true,
-                defaultMaxAge: Number(process.env.CACHE_MAX_AGE) || 0,
-            },
-            context: ({ req, res }) => {
-                authentication.validateCredentials(req.headers?.authorization)
-
-                return {
-                    req,
-                    res
-                }
-            },
-        })
-
+        const server = createServer({schema, executor})
+    
         return await server.listen(PORT).then(({ url }) => {
             console.log(`🚀 Server ready at port ${PORT}`)
         })
